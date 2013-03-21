@@ -689,6 +689,16 @@ var commands = {
         process.exit(-1);
       }
 
+      if (this.setting) {
+        try {
+          var setting = require(this.setting).templateSetting;
+        } catch (e) {
+          console.error("Error reading setting file '%s': '%s", this.setting, program.trace ? e.stack : e.message);
+          process.exit(-1);
+	}
+        Template.applySetting(setting);
+      }
+
       try {
         var output;
         var compiledTemplate = Template.compile(filename, text);
@@ -712,7 +722,10 @@ var commands = {
         "module.exports = function(obj){var __p='', print=function(){__p+=Array.prototype.join.call(arguments, '')};with(obj||{}){__p+='hello '+( name )+'\\n'+",
         "'';} return __p; }"
       ]
-    }
+    },
+    options: [
+      ["-s --setting <filename>", "override the default setting"]
+    ]
   }
 };
 
@@ -755,7 +768,7 @@ function defineCommand (opts, name) {
         _.defaults(program, opts.defaults);
       }
       processData(function (data) {
-        return opts.fn(data, a, b, c, d, e);
+        return opts.fn.call(cmd, data, a, b, c, d, e);
       }, opts);
     });
   }
