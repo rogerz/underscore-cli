@@ -1,0 +1,47 @@
+{
+    "module": {
+	"type_t": "module_t",
+	"var": "module",
+	"config_t": "module_config_t",
+	"callback_t": "module_callback_t",
+	"init_cb": "module_init_cb",
+	"update_cb": "module_update_cb",
+	"ptr": "module_p",
+	"config_init": "module_config_init",
+	"config_load": "module_config_load",
+	"config_get": "module_config_get",
+	"pack_str": "{si,sf,ss}",
+	"unpack_str": "{s?i,s?f,s?s}"
+    },
+    "props": [
+        {
+            "name": "prop_int",
+            "type_t": "int",
+	    "default": "0"
+        },
+	{
+	    "name": "prop_dbl",
+	    "type_t": "double",
+	    "default": "0.1"
+	},
+        {
+            "name": "prop_str",
+            "type_t": "char *",
+	    "default": "\"string\""
+        }
+    ],
+    "vars": {
+	"config": "config",
+	"json": "json",
+	"path": "path",
+	"json_default": "json_default",
+	"config_p": "config_p"
+    },
+    "MACRO": {
+	"INIT_UPDATE_FLAG": "JSON_SKIP_EXISTING"
+    },
+    "config": {
+	"set": "config_set",
+	"get": "config_get"
+    }
+}
